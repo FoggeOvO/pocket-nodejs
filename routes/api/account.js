@@ -6,7 +6,7 @@ const moment = require('moment');
 //导入中间件检测用户是否登陆
 const checkToken = require('../../middlewares/checkTokenMiddleware');
 
-router.get('/account', checkToken,function (req, res, next) {
+router.get('/account', checkToken, (req, res, next)=> {
   console.log(req.username);
   AccountModel.find().sort({ time: 1 }).exec().then(data => {
     res.json({
@@ -24,7 +24,7 @@ router.get('/account', checkToken,function (req, res, next) {
   });
 });
 
-router.post('/account',checkToken, function (req, res, next) {
+router.post('/account',checkToken, (req, res, next)=> {
   AccountModel.create(
     req.body
   ).then((data) => {
@@ -42,7 +42,7 @@ router.post('/account',checkToken, function (req, res, next) {
   });
 });
 
-router.delete('/account/:id', checkToken,function (req, res, next) {
+router.delete('/account/:id', checkToken, (req, res, next) => {
   let id = req.params.id;
   AccountModel.deleteOne({ _id: id }).then((data) => {
     res.json({
@@ -59,7 +59,7 @@ router.delete('/account/:id', checkToken,function (req, res, next) {
   });
 });
 
-router.patch('/account/:id', checkToken,function (req, res, next) {
+router.patch('/account/:id', checkToken, (req, res, next)=> {
   let id = req.params.id;
   AccountModel.updateOne({ _id: id }, req.body).then((data) => {
     AccountModel.findById(id).then((data) => {
@@ -79,7 +79,7 @@ router.patch('/account/:id', checkToken,function (req, res, next) {
   });
 });
 
-router.get('/account/:id', checkToken,function (req, res, next) {
+router.get('/account/:id', checkToken, (req, res, next)=> {
   let id = req.params.id;
   AccountModel.findById({ _id: id }).then((data) => {
     res.json({

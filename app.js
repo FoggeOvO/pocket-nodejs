@@ -7,13 +7,15 @@ var logger = require('morgan');
 var indexRouter = require('./routes/web/index');
 const accountRouter = require('./routes/api/account');
 const userRouter = require('./routes/web/auth');
-const authRouter = require('./routes/api/auth');
+const tokenRouter = require('./routes/api/token.js');
+
 //导入express-session模块
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 //导入config模块
 const {dburl,dbPort,dbName} = require('./config/config.js');
 const { render } = require('ejs');
+const cors = require('cors');
 
 var app = express();
 
@@ -37,6 +39,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
+app.use(cors());//解决跨域问题
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -45,7 +48,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', userRouter)
 app.use('/api', accountRouter);
-app.use('/auth', authRouter);
+app.use('/auth', tokenRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

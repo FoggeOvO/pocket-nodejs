@@ -8,14 +8,14 @@ const db = require('../db/db.js');
 db(()=>{
 
 var app = require('../app');
-var debug = require('debug')('02-account:server');
+var debug = require('debug')('04-account:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '9000');
 app.set('port', port);
 
 /**

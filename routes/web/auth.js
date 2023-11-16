@@ -31,6 +31,7 @@ router.post('/reg', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
   let {username,password} = req.body;
+  console.log(username,password);
   UserModel.findOne({username:username,password:md5(password)})
   .then((data) => {
     if(!data){

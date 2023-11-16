@@ -20,5 +20,8 @@
     "mongoose": "^8.0.0",
     "morgan": "~1.9.1",
     "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }

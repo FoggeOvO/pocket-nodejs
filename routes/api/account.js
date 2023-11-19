@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const AccountModel = require('../../models/AccountModel');
-const moment = require('moment');
 
 //导入中间件检测用户是否登陆
 const checkToken = require('../../middlewares/checkTokenMiddleware');
 
 router.get('/account', checkToken, (req, res, next)=> {
-  console.log(req.username);
+  console.log('@',req.body);
   AccountModel.find().sort({ time: 1 }).exec().then(data => {
     res.json({
       code: '0000',
@@ -25,6 +24,7 @@ router.get('/account', checkToken, (req, res, next)=> {
 });
 
 router.post('/account',checkToken, (req, res, next)=> {
+  console.log(req.body);
   AccountModel.create(
     req.body
   ).then((data) => {

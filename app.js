@@ -6,7 +6,6 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/web/index');
 const accountRouter = require('./routes/api/account');
-const userRouter = require('./routes/web/auth');
 const tokenRouter = require('./routes/api/token.js');
 const authRouter = require('./routes/web/auth');
 const tokenRouter = require('./routes/api/token.js');

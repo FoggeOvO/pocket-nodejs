@@ -8,6 +8,10 @@ var indexRouter = require('./routes/web/index');
 const accountRouter = require('./routes/api/account');
 const userRouter = require('./routes/web/auth');
 const tokenRouter = require('./routes/api/token.js');
+const authRouter = require('./routes/web/auth');
+const tokenRouter = require('./routes/api/token.js');
+const userRouter = require('./routes/api/user/user.js');
+
 
 //导入express-session模块
 const session = require('express-session');
@@ -46,10 +50,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/', userRouter)
+app.use('/', authRouter);
 app.use('/api', accountRouter);
 app.use('/auth', tokenRouter);
-
+app.use('/api/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

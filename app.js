@@ -8,9 +8,8 @@ var indexRouter = require('./routes/web/index');
 const accountRouter = require('./routes/api/account');
 const tokenRouter = require('./routes/api/token.js');
 const authRouter = require('./routes/web/auth');
-const tokenRouter = require('./routes/api/token.js');
-const userRouter = require('./routes/api/user/user.js');
-
+const userRouter = require('./routes/api/hrm/hrm.js');
+const sysRouter = require('./routes/api/hrm/columns.js');
 
 //导入express-session模块
 const session = require('express-session');
@@ -53,7 +52,7 @@ app.use('/', authRouter);
 app.use('/api', accountRouter);
 app.use('/auth', tokenRouter);
 app.use('/api/user', userRouter);
-
+app.use('/api/sys', sysRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.render('404');

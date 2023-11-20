@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const md5 = require('md5');
+const session = require('express-session');
 const UserModel = require('../../models/UserModel');
 const jwt = require('jsonwebtoken');
 const secret = require('../../config/config').secret;
@@ -27,6 +28,7 @@ router.post('/gettoken', (req, res, next) => {
             console.log(err);
             return;
           }
+          req.session.token = data.token
           res.json({
             code: '0000',
             msg: 'success',

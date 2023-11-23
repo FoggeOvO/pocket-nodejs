@@ -4,7 +4,6 @@ const ColumnModel = require('../../../models/ColumnModel');
 
 //导入中间件检测用户是否登陆
 const checkToken = require('../../../middlewares/checkTokenMiddleware');
-const checkLogin = require('../../../middlewares/checkLoginMiddleware');
 
 router.get('/getcolumns',checkToken,function (req, res, next) {
     console.log('@@',req.session.token)

@@ -4,11 +4,9 @@ const UserModel = require('../../../models/UserModel');
 
 //导入中间件检测用户是否登陆
 const checkToken = require('../../../middlewares/checkTokenMiddleware');
-const checkLogin = require('../../../middlewares/checkLoginMiddleware');
 
 router.get('/getusers',checkToken,function (req, res, next) {
-    UserModel.find().then((data) => {
-      console.log('@',req.session)
+    UserModel.find({"isdel":0},{lastname:1,workcode:1,hiredate:1,posion:1,level:1,gender:1,_id:0}).then((data) => {
       if(!data){
         res.json({
             code: '3001',

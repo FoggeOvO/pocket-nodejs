@@ -9,7 +9,7 @@ const secret = require('../../config/config').secret;
 router.post('/gettoken', (req, res, next) => {
   let { username, password } = req.body;
   console.log('@', req.body);
-  UserModel.findOne({ username: username, password: md5(password) })
+  UserModel.findOne({ username: username, password: md5(password)},{lastname:1,workcode:1,_id:0})
     .then((data) => {
       if (!data) {
         res.json({
@@ -18,22 +18,17 @@ router.post('/gettoken', (req, res, next) => {
         });
       } else {
         //登陆成功响应
-        jwt.sign({
+        const token = jwt.sign({
           username: username,
           password: password
         }, secret, {
           expiresIn: 60 * 60 * 24 * 7
-        }, (err, token) => {
-          if (err) {
-            console.log(err);
-            return;
-          }
-          req.session.token = data.token
-          res.json({
-            code: '0000',
-            msg: 'success',
-            data: token
-          });
+        })
+        res.json({
+          code: '0000',
+          msg: 'success',
+          token,
+          user:data
         });
       }
     }).catch((err) => {

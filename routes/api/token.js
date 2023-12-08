@@ -20,7 +20,6 @@ router.post('/gettoken', (req, res, next) => {
         //登陆成功响应
         const token = jwt.sign({
           username: username,
-          password: password
         }, secret, {
           expiresIn: 60 * 60 * 24 * 7
         })
